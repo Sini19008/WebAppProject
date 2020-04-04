@@ -1,0 +1,7 @@
+C:\vilhelmiina\Gitrepost\WebAppProject\WebAccessConsole\bin\Debug\WebAccessConsole.exe.config
+C:\vilhelmiina\Gitrepost\WebAppProject\WebAccessConsole\bin\Debug\WebAccessConsole.exe
+C:\vilhelmiina\Gitrepost\WebAppProject\WebAccessConsole\bin\Debug\WebAccessConsole.pdb
+C:\vilhelmiina\Gitrepost\WebAppProject\WebAccessConsole\obj\Debug\WebAccessConsole.csprojAssemblyReference.cache
+C:\vilhelmiina\Gitrepost\WebAppProject\WebAccessConsole\obj\Debug\WebAccessConsole.csproj.CoreCompileInputs.cache
+C:\vilhelmiina\Gitrepost\WebAppProject\WebAccessConsole\obj\Debug\WebAccessConsole.exe
+C:\vilhelmiina\Gitrepost\WebAppProject\WebAccessConsole\obj\Debug\WebAccessConsole.pdb
