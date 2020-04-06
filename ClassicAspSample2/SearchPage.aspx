@@ -1,10 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SearchPage.aspx.cs" Inherits="ClassicAspSample2.SearchPage" %>
 
 <!DOCTYPE html>
-<% double result = 0.0;
-if (Request.Form.Count > 0)
-result = Convert.ToDouble(Request.Form["Text1"]) + Convert.ToDouble(Request.Form["Text2"]);
-%>
+
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Hakukone</title>
@@ -20,7 +17,7 @@ result = Convert.ToDouble(Request.Form["Text1"]) + Convert.ToDouble(Request.Form
 		<div id="nav2">
 		<h1> Hae uusia yrityksiä </h1> <br/>
 		<h2> Paikkakunta: </h2>
-    <form id="form1" runat="server" method="post" action="SearchPage.aspx">
+    <form id="searchform1" runat="server" method="post" action="SearchPage.aspx">
         <%String[] kaupungit = { "Lahti","Helsinki", "Tampere", "Turku", "Rovaniemi"};
             String selected = "";
             if (Request.Form.Count > 0)
@@ -34,26 +31,35 @@ result = Convert.ToDouble(Request.Form["Text1"]) + Convert.ToDouble(Request.Form
 
                         else
                             Response.Write("<option value=\"" + kaupungit[i] + "\">" + kaupungit[i] + "</option>");
-                    }
+                  }
                     %>
-            
+   
             </select>
-            
+    <h2> Yrityksen perustamisajankohta </h2>
+   <div id="kalenteri">                           
+   <label class="päivmäärät">Päivämäärä 1</label>
+  <input type="date" id="date1" name="date1"/>
+  <label class="päivämäärät2">Päivämäärä 2</label>
+  <input type="date" id="date2" name="date2"/>
+  
+              </div>
+            <div id ="submit">
+                <input id ="button" type=" submit" value ="Hae"/>
+            </div>
             </div>
     </form>
-          <h2> Yrityksen perustamisajankohta </h2>
-             
-		<form action="/action_page.php">
-  <label for="from">Päivämäärä 1</label>
-  <input type="date" id="from" name="from"/>
-            <label for="to">Päivämäärä 2</label>
-  <input type="date" id="to" name="to"/>
-           <input id ="button" type=" submit" value ="Hae" />
-
-  
-</form>
-		
+            <h2>Tulokset</h2>
+                   <%
+        string date1 = Request.Form["date1"];
+        string date2 = Request.Form["date2"];
+      string select1 = Request.Form["select1"];
+                       
+                   %>
+            <div id ="tulokset">
+      <%Response.Write(date1);%><br/><%Response.Write(select1);%>
 		</div>
+		</div>
+    
 </body>
 </html>
  

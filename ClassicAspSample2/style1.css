@@ -3,10 +3,10 @@ body {
 	margin: 0;
 	padding: 0;
 	height: 100%;
-	background-color:#49796b;
+	background-color: #49796b;
 	background-image: url(images/watercolors2.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
+	background-repeat: no-repeat;
+	background-size: cover;
 
 }
 
@@ -71,14 +71,39 @@ body {
 	border-radius: 5px;
 }
 
-
-
-
-
-
-
-.form1 {
-
-	background-color: green;
-	
+#select1 {
+	font-size: 25px;
+	background-color: white;
+	border: 3px solid #037d50;
+	color: #037d50;
+	padding: 15px 32px;
+	text-align:left;
+	text-decoration: none;
+	display: inline-block;
+	margin: 6px 15px;
+	cursor: pointer;
+	border-radius: 5px;
 }
+
+#kalenteri {
+	background-color: white;
+	border: 3px solid #037d50;
+	color: #037d50;
+	padding: 15px 32px;
+	text-align: left;
+	text-decoration: none;
+	display: inline-block;
+	margin: 6px 15px;
+	cursor: pointer;
+	border-radius: 5px;
+	font-size: 16px;
+}
+
+#date1 {
+	font-size: 20px;
+}
+#date2 {
+	font-size: 20px;
+}
+	
+

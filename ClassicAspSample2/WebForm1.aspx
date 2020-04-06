@@ -22,5 +22,9 @@ for (int i = 0; i < 10; i++)
             <input id = "text2" value="<%=23%>" type"text" />
         </div>
         <input id ="Text3" name="Text3" value="<%=23 %>" type="text" /> 
+    <% double result = 0.0;
+if (Request.Form.Count > 0)
+result = Convert.ToDouble(Request.Form["Text1"]) + Convert.ToDouble(Request.Form["Text2"]);
+%>
 </body>
 </html>
