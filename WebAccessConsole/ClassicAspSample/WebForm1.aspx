@@ -7,9 +7,27 @@
     <title></title>
 </head>
 <body>
-    <form id="form1" runat="server">
+    <img src="kissa.png" alt="kissa" class="kuva">
+<div id="nav1">
+		<h1> <a href="sivu1.html"> Etusivu</a> </h1>
+		</div>
+		<div id="nav2">
+		<h1> Hae uusia yrityksiä </h1> <br>
+		<h2> Paikkakunta: </h2>
+			<div id="paikka">
+	    <form id="form1" runat="server">
         <div>
         </div>
     </form>
+
+        </div>
+
+		 <h2> Yrityksen perustamisajankohta </h2>
+		<input type="text" placeholder="Alkaen"> ---
+		<input type="text" placeholder="...">  <br><br>
+		<a href="sivu2.html" class="button">Hae</a>
+		</div>
+
+
 </body>
 </html>

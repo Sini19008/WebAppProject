@@ -26,7 +26,7 @@ result = Convert.ToDouble(Request.Form["Text1"]) + Convert.ToDouble(Request.Form
             if (Request.Form.Count > 0)
                 selected = Request.Form["Select1"];%>
         <div>
-            <select id =" Select1" name="Select1">
+            <select id ="select1" name="select1">
                 <%for (int i = 0; i < kaupungit.Length; i++)
                     {
                         if (selected != " " && selected == kaupungit[i])
@@ -36,14 +36,24 @@ result = Convert.ToDouble(Request.Form["Text1"]) + Convert.ToDouble(Request.Form
                             Response.Write("<option value=\"" + kaupungit[i] + "\">" + kaupungit[i] + "</option>");
                     }
                     %>
+            
             </select>
-            <input id =" button2" type=" submit" value =" get companys" />
+            
             </div>
     </form>
           <h2> Yrityksen perustamisajankohta </h2>
-		<input type="text" placeholder="Alkaen"> ---
-		<input type="text" placeholder="...">  <br><br>
-		<a href="sivu2.html" class="button">Hae</a>
+             
+		<form action="/action_page.php">
+  <label for="from">Päivämäärä 1</label>
+  <input type="date" id="from" name="from"/>
+            <label for="to">Päivämäärä 2</label>
+  <input type="date" id="to" name="to"/>
+           <input id ="button" type=" submit" value ="Hae" />
+
+  
+</form>
+		
 		</div>
 </body>
 </html>
+ 

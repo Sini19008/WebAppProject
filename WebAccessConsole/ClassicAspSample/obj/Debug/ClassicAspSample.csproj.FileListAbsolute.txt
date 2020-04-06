@@ -57,3 +57,5 @@ C:\vilhelmiina\Gitrepost\WebAppProject\ClassicAspSample\obj\Debug\ClassicAspSamp
 C:\vilhelmiina\Gitrepost\WebAppProject\ClassicAspSample\obj\Debug\ClassicAspSample.csproj.CopyComplete
 C:\vilhelmiina\Gitrepost\WebAppProject\ClassicAspSample\obj\Debug\ClassicAspSample.dll
 C:\vilhelmiina\Gitrepost\WebAppProject\ClassicAspSample\obj\Debug\ClassicAspSample.pdb
+C:\vilhelmiina\Gitrepost\WebAppProject\WebAccessConsole\ClassicAspSample\obj\Debug\ClassicAspSample.dll
+C:\vilhelmiina\Gitrepost\WebAppProject\WebAccessConsole\ClassicAspSample\obj\Debug\ClassicAspSample.pdb
