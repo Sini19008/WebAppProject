@@ -35,6 +35,7 @@
                     %>
    
             </select>
+
             
     <h2> Yrityksen perustamisajankohta </h2>
    <div id="kalenteri">                           
@@ -44,24 +45,32 @@
   <input type="date" id="date2" name="date2"/>
   
               </div>
+            <div id="yritys">
+                <h2>Haku yrityksen nimellä</h2>
+               <label class="yritys1"></label>
+                <input type="text" id="nimihaku" name="nimihaku" value=""><br>
+            </div>
             <div id ="submit">
                 <input id ="button" type="submit" value ="Hae"/>
             </div>
             </div>
     </form>
+             <div id ="tulokset">
             <h2>Tulokset</h2>
+             
                    <%
         string date1 = Request.Form["date1"];
         string date2 = Request.Form["date2"];
       string select1 = Request.Form["select1"];
+         string nimihaku = Request.Form["nimihaku"];
                         %>
-
+   
+            
+      <%Response.Write(date1);%><br/><%Response.Write(date2);%><br/><%Response.Write(select1);%><br/><%Response.Write(nimihaku);%>
      
-                      
-                  
-            <div id ="tulokset">
-      <%Response.Write(date1);%><br/><%Response.Write(date2);%><br/><%Response.Write(select1);%>
-		</div>
+		     </div>
+
+
 		</div>
     
 </body>

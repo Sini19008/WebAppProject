@@ -21,7 +21,6 @@ body {
 	margin-top:30px;
 	margin-left:15%;
 	width: 70%;
-
 	border: 3px solid white;
 	background-color:#FFFAFA;
 	border-radius: 5px;
@@ -29,22 +28,17 @@ body {
 
 
 }
-#nav1, a
-{
-	color: #037d50;
-	text-decoration: none;
 
-}
 
 #nav2 {
 	background-color: #FFFAFA;
-	color: black;
-	margin-top:20px;
-	margin-left:15%;
+   color:#037d50;
+	margin-top: 20px;
+	margin-left: 15%;
 	width: 70%;
 	border: 3px solid white;
 	border-radius: 5px;
-	height:700px;
+	height: 900px;
 }
 
 
@@ -72,7 +66,7 @@ body {
 }
 
 #select1 {
-	font-size: 25px;
+	font-size: 20px;
 	background-color: white;
 	border: 3px solid #037d50;
 	color: #037d50;
@@ -101,9 +95,28 @@ body {
 
 #date1 {
 	font-size: 20px;
+
 }
 #date2 {
 	font-size: 20px;
-}
-	
 
+
+}
+#tulokset {
+
+	font-size: 20px;
+}
+#nimihaku {
+	background-color: white;
+	border: 3px solid #037d50;
+	
+	color: #037d50;
+	padding: 15px 32px;
+	text-align: left;
+	text-decoration: none;
+	display: inline-block;
+	margin: 6px 15px;
+	cursor: pointer;
+	border-radius: 5px;
+	font-size: 16px;
+}
