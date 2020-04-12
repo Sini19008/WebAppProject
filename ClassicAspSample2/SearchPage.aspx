@@ -2,6 +2,9 @@
 
 <!DOCTYPE html>
 
+<%@ Import Namespace="System.IO" %>
+<%@ Import Namespace="System.Net"%>
+
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Hakukone</title>
@@ -10,6 +13,21 @@
 		<link rel="stylesheet" type ="text/css" href="style1.css"/>
 </head>
 <body>
+
+    <%
+StringWriter writer = new StringWriter();
+WebRequest myRequest = WebRequest.Create(@"https://avoindata.prh.fi/tr/v1?totalResults=false&maxResults=1000&companyRegistrationFrom=2020-01-01&companyRegistrationTo=2020-01-31");
+WebResponse response = myRequest.GetResponse();
+// Get the stream containing content returned by the server.
+Stream dataStream = response.GetResponseStream();
+// Open the stream using a StreamReader for easy access.
+StreamReader reader = new StreamReader(dataStream);
+// Read the content.
+string responseFromServer = reader.ReadToEnd();
+//Now this string includes all data from the external web site for further use
+
+%>
+
     <img src="kissa.png" alt="kissa" class="kuva"/>
         <div id="nav1">
 		<h1>  Etusivu</h1>
@@ -26,8 +44,10 @@
             <select id ="select1" name="select1">
                 <%for (int i = 0; i < kaupungit.Length; i++)
                     {
-                        if (selected != " " && selected == kaupungit[i])
-                            Response.Write("<option selected = \"selected\" value=\"" + kaupungit[i] + "\">" + kaupungit[i] + "<option>");
+                        //if (selected != " " && selected == kaupungit[i])
+                        if (selected == kaupungit[i])
+                            Response.Write("<option value=\"" + kaupungit[i] + "\">" + kaupungit[i] + "</option>");
+                            //Response.Write("<option selected = \"selected\" value=\"" + kaupungit[i] + "\">" + kaupungit[i] + "<option>");
 
                         else
                             Response.Write("<option value=\"" + kaupungit[i] + "\">" + kaupungit[i] + "</option>");
@@ -66,7 +86,13 @@
                         %>
    
             
-      <%Response.Write(date1);%><br/><%Response.Write(date2);%><br/><%Response.Write(select1);%><br/><%Response.Write(nimihaku);%>
+      <%Response.Write(date1);%><br/><%Response.Write(date2);%><br/>
+                 <%Response.Write(select1);%>
+                 
+                 <br/>
+
+                 
+                 <%Response.Write(nimihaku);%>
      
 		     </div>
 
@@ -75,4 +101,5 @@
     
 </body>
 </html>
+ 
  
