@@ -14,19 +14,7 @@
 </head>
 <body>
 
-    <%
-StringWriter writer = new StringWriter();
-WebRequest myRequest = WebRequest.Create(@"https://avoindata.prh.fi/tr/v1?totalResults=false&maxResults=1000&companyRegistrationFrom=2020-01-01&companyRegistrationTo=2020-01-31");
-WebResponse response = myRequest.GetResponse();
-// Get the stream containing content returned by the server.
-Stream dataStream = response.GetResponseStream();
-// Open the stream using a StreamReader for easy access.
-StreamReader reader = new StreamReader(dataStream);
-// Read the content.
-string responseFromServer = reader.ReadToEnd();
-//Now this string includes all data from the external web site for further use
 
-%>
 
     <img src="kissa.png" alt="kissa" class="kuva"/>
         <div id="nav1">
@@ -40,6 +28,19 @@ string responseFromServer = reader.ReadToEnd();
             String selected = "";
             if (Request.Form.Count > 0)
                 selected = Request.Form["Select1"];%>
+          <%
+StringWriter writer = new StringWriter();
+WebRequest myRequest = WebRequest.Create(@"https://avoindata.prh.fi/tr/v1?totalResults=false&maxResults=1000&companyRegistrationFrom=2020-01-01&companyRegistrationTo=2020-01-31");
+WebResponse response = myRequest.GetResponse();
+// Get the stream containing content returned by the server.
+Stream dataStream = response.GetResponseStream();
+// Open the stream using a StreamReader for easy access.
+StreamReader reader = new StreamReader(dataStream);
+// Read the content.
+string responseFromServer = reader.ReadToEnd();
+//Now this string includes all data from the external web site for further use
+
+%>
         <div>
             <select id ="select1" name="select1">
                 <%for (int i = 0; i < kaupungit.Length; i++)
@@ -68,7 +69,7 @@ string responseFromServer = reader.ReadToEnd();
             <div id="yritys">
                 <h2>Haku yrityksen nimellä</h2>
                <label class="yritys1"></label>
-                <input type="text" id="nimihaku" name="nimihaku" value=""><br>
+                <input type="text" id="nimihaku" name="nimihaku" value=""/><br/>
             </div>
             <div id ="submit">
                 <input id ="button" type="submit" value ="Hae"/>
