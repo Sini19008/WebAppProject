@@ -40,6 +40,24 @@ StreamReader reader = new StreamReader(dataStream);
 string responseFromServer = reader.ReadToEnd();
 //Now this string includes all data from the external web site for further use
 
+       /*    Tästä pitäisi muokata kaupunkihaku
+        *    string[] words = responseFromServer.Split();
+    int a = 0;
+    while(!words[a].Contains("currency='USD'") && a<words.Length)
+    {
+        a++;
+    }
+
+    string lukusana = words[a + 1];
+    lukusana = lukusana.Substring(6);
+    int pituus = lukusana.Length - 3;
+    lukusana = lukusana.Substring(0,pituus);
+    lukusana = lukusana.Replace('.', ',');
+    double luku = Convert.ToDouble(lukusana);
+    Response.Write(luku);
+
+    //Now this string includes all data from the external web site for further use
+    //Response.Write(responseFromServer); */
 %>
         <div>
             <select id ="select1" name="select1">
@@ -84,6 +102,7 @@ string responseFromServer = reader.ReadToEnd();
         string date2 = Request.Form["date2"];
       string select1 = Request.Form["select1"];
          string nimihaku = Request.Form["nimihaku"];
+        string webAddress = "https://avoindata.prh.fi/tr/v1?totalResults=false&maxResults=1000&companyRegistrationFrom=" + date1 + "&companyRegistrationTo=" + date2;
                         %>
    
             
