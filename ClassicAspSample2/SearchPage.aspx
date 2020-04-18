@@ -26,26 +26,25 @@
             if (Request.Form.Count > 0)
                 selected = Request.Form["Select1"];%>
           <%
-StringWriter writer = new StringWriter();
 WebRequest myRequest = WebRequest.Create(@"https://avoindata.prh.fi/tr/v1?totalResults=false&maxResults=1000&companyRegistrationFrom=2020-01-01&companyRegistrationTo=2020-01-31");
 WebResponse response = myRequest.GetResponse();
 // Get the stream containing content returned by the server.
 Stream dataStream = response.GetResponseStream();
 // Open the stream using a StreamReader for easy access.
-StreamReader reader = new StreamReader(dataStream);
+StreamReader reader = new StreamReader(response.GetResponseStream(), Encoding.ASCII);
 // Read the content.
-string responseFromServer = reader.ReadToEnd();
+string webText = reader.ReadToEnd();
 //Now this string includes all data from the external web site for further use
 
        /*    Tästä pitäisi muokata kaupunkihaku
-        *    string[] words = responseFromServer.Split();
+        *    string[] city = responseFromServer.Split();
     int a = 0;
-    while(!words[a].Contains("currency='USD'") && a<words.Length)
+    while(!city[a].Contains("select1") && a<words.Length)
     {
         a++;
     }
 
-    string lukusana = words[a + 1];
+    string lukusana = city[a + 1];
     lukusana = lukusana.Substring(6);
     int pituus = lukusana.Length - 3;
     lukusana = lukusana.Substring(0,pituus);
