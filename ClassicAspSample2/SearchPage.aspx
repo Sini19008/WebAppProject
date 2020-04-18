@@ -29,15 +29,7 @@
             if (Request.Form.Count > 0)
                 selected = Request.Form["Select1"];%>
           <%
-StringWriter writer = new StringWriter();
-WebRequest myRequest = WebRequest.Create(@"https://avoindata.prh.fi/tr/v1?totalResults=false&maxResults=1000&companyRegistrationFrom=2020-01-01&companyRegistrationTo=2020-01-31");
-WebResponse response = myRequest.GetResponse();
-// Get the stream containing content returned by the server.
-Stream dataStream = response.GetResponseStream();
-// Open the stream using a StreamReader for easy access.
-StreamReader reader = new StreamReader(dataStream);
-// Read the content.
-string responseFromServer = reader.ReadToEnd();
+
 //Now this string includes all data from the external web site for further use
 
        /*    Tästä pitäisi muokata kaupunkihaku
@@ -98,12 +90,29 @@ string responseFromServer = reader.ReadToEnd();
             <h2>Tulokset</h2>
              
                    <%
+StringWriter writer = new StringWriter();
+WebRequest myRequest = WebRequest.Create(@"https://avoindata.prh.fi/tr/v1?totalResults=false&maxResults=1000&companyRegistrationFrom=2020-01-01&companyRegistrationTo=2020-01-31");
+WebResponse response = myRequest.GetResponse();
+// Get the stream containing content returned by the server.
+Stream dataStream = response.GetResponseStream();
+// Open the stream using a StreamReader for easy access.
+StreamReader reader = new StreamReader(dataStream);
+// Read the content.
+string responseFromServer = reader.ReadToEnd();
         string date1 = Request.Form["date1"];
         string date2 = Request.Form["date2"];
       string select1 = Request.Form["select1"];
          string nimihaku = Request.Form["nimihaku"];
         string webAddress = "https://avoindata.prh.fi/tr/v1?totalResults=false&maxResults=1000&companyRegistrationFrom=" + date1 + "&companyRegistrationTo=" + date2;
-                        %>
+                       while (responseFromServer != webAddress)
+                       { if (responseFromServer == webAddress)
+                           {
+                               Response.Write(webAddress);
+                               
+                           }
+                        
+                       }
+                       %>
    
             
       <%Response.Write(date1);%><br/><%Response.Write(date2);%><br/>
