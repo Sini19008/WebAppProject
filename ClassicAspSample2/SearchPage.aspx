@@ -13,9 +13,6 @@
 		<link rel="stylesheet" type ="text/css" href="style1.css"/>
 </head>
 <body>
-
-
-
     <img src="kissa.png" alt="kissa" class="kuva"/>
         <div id="nav1">
 		<h1>  Etusivu</h1>
