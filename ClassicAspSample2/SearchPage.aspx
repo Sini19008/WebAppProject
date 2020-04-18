@@ -13,6 +13,9 @@
 		<link rel="stylesheet" type ="text/css" href="style1.css"/>
 </head>
 <body>
+
+
+
     <img src="kissa.png" alt="kissa" class="kuva"/>
         <div id="nav1">
 		<h1>  Etusivu</h1>
@@ -26,25 +29,26 @@
             if (Request.Form.Count > 0)
                 selected = Request.Form["Select1"];%>
           <%
+StringWriter writer = new StringWriter();
 WebRequest myRequest = WebRequest.Create(@"https://avoindata.prh.fi/tr/v1?totalResults=false&maxResults=1000&companyRegistrationFrom=2020-01-01&companyRegistrationTo=2020-01-31");
 WebResponse response = myRequest.GetResponse();
 // Get the stream containing content returned by the server.
 Stream dataStream = response.GetResponseStream();
 // Open the stream using a StreamReader for easy access.
-StreamReader reader = new StreamReader(response.GetResponseStream(), Encoding.ASCII);
+StreamReader reader = new StreamReader(dataStream);
 // Read the content.
-string webText = reader.ReadToEnd();
+string responseFromServer = reader.ReadToEnd();
 //Now this string includes all data from the external web site for further use
 
        /*    Tästä pitäisi muokata kaupunkihaku
-        *    string[] city = responseFromServer.Split();
+        *    string[] words = responseFromServer.Split();
     int a = 0;
-    while(!city[a].Contains("select1") && a<words.Length)
+    while(!words[a].Contains("currency='USD'") && a<words.Length)
     {
         a++;
     }
 
-    string lukusana = city[a + 1];
+    string lukusana = words[a + 1];
     lukusana = lukusana.Substring(6);
     int pituus = lukusana.Length - 3;
     lukusana = lukusana.Substring(0,pituus);
