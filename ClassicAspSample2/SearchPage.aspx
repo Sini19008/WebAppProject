@@ -90,39 +90,71 @@
             <h2>Tulokset</h2>
              
                    <%
-StringWriter writer = new StringWriter();
-WebRequest myRequest = WebRequest.Create(@"https://avoindata.prh.fi/tr/v1?totalResults=false&maxResults=1000&companyRegistrationFrom=2020-01-01&companyRegistrationTo=2020-01-31");
-WebResponse response = myRequest.GetResponse();
-// Get the stream containing content returned by the server.
-Stream dataStream = response.GetResponseStream();
-// Open the stream using a StreamReader for easy access.
-StreamReader reader = new StreamReader(dataStream);
-// Read the content.
-string responseFromServer = reader.ReadToEnd();
-        string date1 = Request.Form["date1"];
-        string date2 = Request.Form["date2"];
-      string select1 = Request.Form["select1"];
-         string nimihaku = Request.Form["nimihaku"];
-        string webAddress = "https://avoindata.prh.fi/tr/v1?totalResults=false&maxResults=1000&companyRegistrationFrom=" + date1 + "&companyRegistrationTo=" + date2;
-                       while (responseFromServer != webAddress)
-                       { if (responseFromServer == webAddress)
+                       if(Request.Form.Count > 0)
+                       {
+                           string date1 = Request.Form["date1"];
+                           string date2 = Request.Form["date2"];
+                           string select1 = Request.Form["select1"];
+                           string nimihaku = Request.Form["nimihaku"];
+
+                           string webAddress = "https://avoindata.prh.fi/tr/v1?totalResults=false&maxResults=1000&companyRegistrationFrom=" + date1 + "&companyRegistrationTo=" + date2;
+
+                           WebRequest myRequest = WebRequest.Create(webAddress);
+                           WebResponse response = myRequest.GetResponse();
+                           // Get the stream containing content returned by the server.
+                           Stream dataStream = response.GetResponseStream();
+                           // Open the stream using a StreamReader for easy access.
+                           StreamReader reader = new StreamReader(dataStream);
+                           // Read the content.
+                           string responseFromServer = reader.ReadToEnd();
+
+
+                           string[] joku = responseFromServer.Split('"');
+                           Response.Write(joku[0]);
+                           int i = 0;
+
+                           while(i < joku.Length)
                            {
-                               Response.Write(webAddress);
-                               
+                               if (joku[i] == "detailsUri")
+                               {
+                                   string webAddress2 = joku[i + 2];
+
+                                   WebRequest myRequest2 = WebRequest.Create(webAddress2);
+                                   WebResponse response2 = myRequest2.GetResponse();
+                                   // Get the stream containing content returned by the server.
+                                   Stream dataStream2 = response2.GetResponseStream();
+                                   // Open the stream using a StreamReader for easy access.
+                                   StreamReader reader2 = new StreamReader(dataStream2);
+                                   // Read the content.
+                                   string responseFromServer2 = reader2.ReadToEnd();
+                                   string[] joku2 = responseFromServer2.Split('"');
+                                   Response.Write(responseFromServer2);
+                                   
+                               }
+                               i++;
                            }
-                        
+
+
                        }
+
+
+
+
+
+
+
+
+
+
+
+
+
                        %>
+
+                      
    
             
-      <%Response.Write(date1);%><br/><%Response.Write(date2);%><br/>
-                 <%Response.Write(select1);%>
-                 
-                 <br/>
-
-                 
-                 <%Response.Write(nimihaku);%>
-     
+ 
 		     </div>
 
 
