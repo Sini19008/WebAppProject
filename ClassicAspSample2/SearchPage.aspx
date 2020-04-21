@@ -28,29 +28,7 @@
             String selected = "";
             if (Request.Form.Count > 0)
                 selected = Request.Form["Select1"];%>
-          <%
-
-//Now this string includes all data from the external web site for further use
-
-       /*    Tästä pitäisi muokata kaupunkihaku
-        *    string[] words = responseFromServer.Split();
-    int a = 0;
-    while(!words[a].Contains("currency='USD'") && a<words.Length)
-    {
-        a++;
-    }
-
-    string lukusana = words[a + 1];
-    lukusana = lukusana.Substring(6);
-    int pituus = lukusana.Length - 3;
-    lukusana = lukusana.Substring(0,pituus);
-    lukusana = lukusana.Replace('.', ',');
-    double luku = Convert.ToDouble(lukusana);
-    Response.Write(luku);
-
-    //Now this string includes all data from the external web site for further use
-    //Response.Write(responseFromServer); */
-%>
+         
         <div>
             <select id ="select1" name="select1">
                 <%for (int i = 0; i < kaupungit.Length; i++)
@@ -129,6 +107,24 @@
                                    string responseFromServer2 = reader2.ReadToEnd();
                                    string[] joku2 = responseFromServer2.Split('"');
                                    Response.Write(responseFromServer2);
+
+                                   int f = 0;
+                                   if (joku2[f] == select1)
+                                   {
+                                       int v = 0;
+                                       while (joku2[v] != "name")
+                                       {
+                                           v++;
+                                       }
+                                       if (joku2[v] == "name")
+                                       {
+                                           string yrityksennimi = joku2[v + 1];
+                                           Console.Write(yrityksennimi);
+                                       }
+
+                                       f++;
+                                   }
+
                                    
                                }
                                i++;
