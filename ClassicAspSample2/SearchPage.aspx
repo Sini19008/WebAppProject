@@ -75,7 +75,7 @@
                            string select1 = Request.Form["select1"];
                            string nimihaku = Request.Form["nimihaku"];
 
-                           string webAddress = "https://avoindata.prh.fi/tr/v1?totalResults=false&maxResults=1000&companyRegistrationFrom=" + date1 + "&companyRegistrationTo=" + date2;
+                           string webAddress = "https://avoindata.prh.fi/tr/v1?totalResults=false&maxResults=10&companyRegistrationFrom=" + date1 + "&companyRegistrationTo=" + date2;
 
                            WebRequest myRequest = WebRequest.Create(webAddress);
                            WebResponse response = myRequest.GetResponse();
