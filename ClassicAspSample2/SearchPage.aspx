@@ -99,18 +99,29 @@
 
                                    WebRequest myRequest2 = WebRequest.Create(webAddress2);
                                    WebResponse response2 = myRequest2.GetResponse();
-                                   // Get the stream containing content returned by the server.
+
                                    Stream dataStream2 = response2.GetResponseStream();
-                                   // Open the stream using a StreamReader for easy access.
+
                                    StreamReader reader2 = new StreamReader(dataStream2);
-                                   // Read the content.
+
                                    string responseFromServer2 = reader2.ReadToEnd();
+
                                    string[] joku2 = responseFromServer2.Split('"');
                                    Response.Write(responseFromServer2);
 
                                    int f = 0;
+                                   //if(joku2[f] == "name")
                                    if (joku2[f] == select1)
                                    {
+                                   WebRequest myRequest3 = WebRequest.Create(webAddress2); // en tiedä pitääkö tän litanian olla tässä vai ei.. 
+                                   WebResponse response3 = myRequest3.GetResponse();
+
+                                   Stream dataStream3 = response3.GetResponseStream();
+
+                                   StreamReader reader3 = new StreamReader(dataStream2);
+
+                                   string responseFromServer3 = reader3.ReadToEnd();
+
                                        int v = 0;
                                        while (joku2[v] != "name")
                                        {
@@ -119,13 +130,14 @@
                                        if (joku2[v] == "name")
                                        {
                                            string yrityksennimi = joku2[v + 1];
-                                           Console.Write(yrityksennimi);
+                                           // Console.Write(yrityksennimi);
+                                           Response.Write(yrityksennimi);
                                        }
 
                                        f++;
                                    }
 
-                                   
+
                                }
                                i++;
                            }
