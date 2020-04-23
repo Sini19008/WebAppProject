@@ -54,11 +54,7 @@
   <input type="date" id="date2" name="date2"/>
   
               </div>
-            <div id="yritys">
-                <h2>Haku yrityksen nimellä</h2>
-               <label class="yritys1"></label>
-                <input type="text" id="nimihaku" name="nimihaku" value=""/><br/>
-            </div>
+
             <div id ="submit">
                 <input id ="button" type="submit" value ="Hae"/>
             </div>
@@ -73,7 +69,7 @@
                            string date1 = Request.Form["date1"];
                            string date2 = Request.Form["date2"];
                            string select1 = Request.Form["select1"];
-                           string nimihaku = Request.Form["nimihaku"];
+                           
 
                            string webAddress = "https://avoindata.prh.fi/tr/v1?totalResults=false&maxResults=10&companyRegistrationFrom=" + date1 + "&companyRegistrationTo=" + date2;
 
@@ -88,12 +84,12 @@
 
 
                            string[] joku = responseFromServer.Split('"');
-                           Response.Write(joku[0]);
+                           //Response.Write(joku[0]);
                            int i = 0;
 
                            while(i < joku.Length)
                            {
-                               if (joku[i] == "detailsUri")
+                               if (joku[i] == "detailsUri") //39
                                {
                                    string webAddress2 = joku[i + 2];
 
@@ -107,35 +103,36 @@
                                    string responseFromServer2 = reader2.ReadToEnd();
 
                                    string[] joku2 = responseFromServer2.Split('"');
-                                   Response.Write(responseFromServer2);
+                                   //Response.Write(responseFromServer2);
 
                                    int f = 0;
-                                   //if(joku2[f] == "name")
-                                   if (joku2[f] == select1)
+                                   while (f < joku2.Length)
                                    {
-                                   WebRequest myRequest3 = WebRequest.Create(webAddress2); // en tiedä pitääkö tän litanian olla tässä vai ei.. 
-                                   WebResponse response3 = myRequest3.GetResponse();
+                                      
+                                       //if(joku2[f] == "name")
 
-                                   Stream dataStream3 = response3.GetResponseStream();
-
-                                   StreamReader reader3 = new StreamReader(dataStream2);
-
-                                   string responseFromServer3 = reader3.ReadToEnd();
-
-                                       int v = 0;
-                                       while (joku2[v] != "name")
+                                       //if (joku2[f] == select1)
+                                       if(joku2[f] == "city") //95
                                        {
-                                           v++;
-                                       }
-                                       if (joku2[v] == "name")
-                                       {
-                                           string yrityksennimi = joku2[v + 1];
-                                           // Console.Write(yrityksennimi);
-                                           Response.Write(yrityksennimi);
-                                       }
 
-                                       f++;
-                                   }
+
+                                           int v = 0;
+                                           while (joku2[v] != "name")
+                                           {
+                                               v++;
+
+                                               if (joku2[v] == "name") //25
+                                               {
+                                                   string yrityksennimi = joku2[v + 2];
+                                                    //Console.Write(yrityksennimi);
+                                                  
+                                                Response.Write(yrityksennimi);
+                                               }
+                                           }
+
+
+                                       }
+                                   f++;}
 
 
                                }
@@ -150,7 +147,7 @@
 
 
 
-
+                       
 
 
 
