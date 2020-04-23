@@ -69,7 +69,7 @@
                            string date1 = Request.Form["date1"];
                            string date2 = Request.Form["date2"];
                            string select1 = Request.Form["select1"];
-                           
+
 
                            string webAddress = "https://avoindata.prh.fi/tr/v1?totalResults=false&maxResults=10&companyRegistrationFrom=" + date1 + "&companyRegistrationTo=" + date2;
 
@@ -108,31 +108,40 @@
                                    int f = 0;
                                    while (f < joku2.Length)
                                    {
-                                      
+
                                        //if(joku2[f] == "name")
 
-                                       //if (joku2[f] == select1)
+
+
                                        if(joku2[f] == "city") //95
                                        {
-
-
-                                           int v = 0;
-                                           while (joku2[v] != "name")
+                                           //tähän vielä city == select1
+                                           if (joku2[f] == Request.Form["select1"])
                                            {
+                                               Response.Write(select1);
+                                           
+                                            
+                                            
+
+                                             int v = 0;
+                                             while (joku2[v] != "name")
+                                             {
                                                v++;
 
                                                if (joku2[v] == "name") //25
                                                {
                                                    string yrityksennimi = joku2[v + 2];
-                                                    //Console.Write(yrityksennimi);
-                                                  
-                                                Response.Write(yrityksennimi);
+                                                   //Console.Write(yrityksennimi);
+
+                                                   Response.Write(yrityksennimi);
+                                                       //arrayn nimi lukumäärä väliaikainen muuttuja löydettyjen tulosten 10
                                                }
+                                             }
+                                           
                                            }
 
-
                                        }
-                                   f++;}
+                               f++;}
 
 
                                }
@@ -147,7 +156,7 @@
 
 
 
-                       
+
 
 
 
