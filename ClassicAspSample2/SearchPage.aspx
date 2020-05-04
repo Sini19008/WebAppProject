@@ -46,7 +46,7 @@
             </select>
 
             
-    <h2> Yrityksen perustamisajankohta </h2>
+    <h2> Yrityksen perustamisajankohta: </h2>
    <div id="kalenteri">                           
    <label class="päivmäärät">Päivämäärä 1</label>
   <input type="date" id="date1" name="date1"/>
@@ -64,14 +64,27 @@
             <h2>Tulokset</h2>
              
                    <%
-                       if(Request.Form.Count > 0)
+                       if (Request.Form.Count > 0)
                        {
                            string date1 = Request.Form["date1"];
                            string date2 = Request.Form["date2"];
                            string select1 = Request.Form["select1"];
 
 
-                           string webAddress = "https://avoindata.prh.fi/tr/v1?totalResults=false&maxResults=10&companyRegistrationFrom=" + date1 + "&companyRegistrationTo=" + date2;
+                           string webAddress = "https://avoindata.prh.fi/tr/v1?totalResults=false&maxResults=10&resultsFrom=0";
+
+                           if (select1 != "")
+                {
+                    webAddress += "&registeredOffice=" + select1;
+                }
+                           if (date1 != "")
+                {
+                    webAddress += "&companyRegistrationFrom=" + date1;
+                }
+                if (date2 != "")
+                {
+                    webAddress += "&companyRegistrationTo=" + date2;
+                }
 
                            WebRequest myRequest = WebRequest.Create(webAddress);
                            WebResponse response = myRequest.GetResponse();
@@ -82,90 +95,84 @@
                            // Read the content.
                            string responseFromServer = reader.ReadToEnd();
 
+                           const int max_size = 10;
+                           string[] tuloksetYritys = new string[max_size];
+                           string[] tuloksetKaupunki = new string[max_size];
+                           string[] tuloksetPaivamaara = new string[max_size];
+                           int lastYritys = 0;
+                           int lastPaivamaara = 0;
+                           int lastKaupunki = 0;
 
-                           string[] joku = responseFromServer.Split('"');
-                           //Response.Write(joku[0]);
-                           int i = 0;
-
-                           while(i < joku.Length)
+                           int Yrityshaku = 0;
+                           while (Yrityshaku < max_size)
                            {
-                               if (joku[i] == "detailsUri") //39
-                               {
-                                   string webAddress2 = joku[i + 2];
+                               //first occurrence of the character
+                               int firstYritys = responseFromServer.IndexOf("\"name\":\"", lastYritys);
+                               int firstYritys1 = firstYritys + 8;
+                               lastYritys = responseFromServer.IndexOf("\"", firstYritys1);
+                               int lengthYritys = lastYritys - firstYritys1;
+                               tuloksetYritys[Yrityshaku] = responseFromServer.Substring(firstYritys1, lengthYritys);
+                               Yrityshaku++;
+                           }
+                           int Paivamaarahaku = 0;
+                           while (Paivamaarahaku < max_size)
+                           {
+                               int firstPaivamaara = responseFromServer.IndexOf("\"registrationDate\":\"", lastPaivamaara);
+                               int firstPaivamaara1 = firstPaivamaara + 20;
+                               lastPaivamaara = responseFromServer.IndexOf("\"", firstPaivamaara1);
+                               int lengthPaivamaara = lastPaivamaara - firstPaivamaara1;
+                               tuloksetPaivamaara[Paivamaarahaku] = responseFromServer.Substring(firstPaivamaara1, lengthPaivamaara);
+                               Paivamaarahaku++;
+                           }
 
-                                   WebRequest myRequest2 = WebRequest.Create(webAddress2);
-                                   WebResponse response2 = myRequest2.GetResponse();
+                           int Kaupunkihaku = 0;
+                           while (Kaupunkihaku < max_size)
+                           {
+                               int firstKaupunki = responseFromServer.IndexOf("\"bisDetailsUri\":\"", lastKaupunki);
+                               int firstKaupunki1 = firstKaupunki + 17;
+                               lastKaupunki = responseFromServer.IndexOf("\"", firstKaupunki1);
+                               int lengthKaupunki = lastKaupunki - firstKaupunki1;
+                               String kaupungit = responseFromServer.Substring(firstKaupunki1, lengthKaupunki);
 
-                                   Stream dataStream2 = response2.GetResponseStream();
+                               WebRequest myReqdetails = WebRequest.Create(kaupungit);
+                               WebResponse detailsRes = myReqdetails.GetResponse();
+                               StreamReader detailreader = new StreamReader(detailsRes.GetResponseStream());
+                               String joku = detailreader.ReadToEnd();
 
-                                   StreamReader reader2 = new StreamReader(dataStream2);
-
-                                   string responseFromServer2 = reader2.ReadToEnd();
-
-                                   string[] joku2 = responseFromServer2.Split('"');
-                                   //Response.Write(responseFromServer2);
-
-                                   int f = 0;
-                                   while (f < joku2.Length)
-                                   {
-
-                                       //if(joku2[f] == "name")
-
-
-
-                                       if(joku2[f] == "city") //95
-                                       {
-                                           //tähän vielä city == select1
-                                           if (joku2[f] == Request.Form["select1"])
-                                           {
-                                               Response.Write(select1);
-                                           
-                                            
-                                            
-
-                                             int v = 0;
-                                             while (joku2[v] != "name")
-                                             {
-                                               v++;
-
-                                               if (joku2[v] == "name") //25
-                                               {
-                                                   string yrityksennimi = joku2[v + 2];
-                                                   //Console.Write(yrityksennimi);
-
-                                                   Response.Write(yrityksennimi);
-                                                       //arrayn nimi lukumäärä väliaikainen muuttuja löydettyjen tulosten 10
-                                               }
-                                             }
-                                           
-                                           }
-
-                                       }
-                               f++;}
-
-
-                               }
-                               i++;
+                               int firstKaupunki3 = joku.IndexOf("\"city\":\"");
+                               int firstKaupunki4 = firstKaupunki3 + 8;
+                               int lastKaupunki1 = joku.IndexOf("\"", firstKaupunki4);
+                               int lengthKaupunki1 = lastKaupunki1 - firstKaupunki4;
+                               tuloksetKaupunki[Kaupunkihaku] = joku.Substring(firstKaupunki4, lengthKaupunki1);
+                               Kaupunkihaku++;
                            }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                           int tulokset = 0;
+                           while (tulokset < max_size)
+                           {
+                               //hakutulokset
+                               Response.Write(tuloksetYritys[tulokset] + "<br>");
+                               Response.Write(tuloksetPaivamaara[tulokset] + "<br>");
+                               Response.Write(tuloksetKaupunki[tulokset] + "<br><br>");
+                               tulokset++;
+                           }
                        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-                       %>
-
-                      
+            %>
    
             
  
