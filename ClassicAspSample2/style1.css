@@ -39,6 +39,7 @@ body {
 	border-radius: 5px;
 	height: auto;
 	overflow: hidden;
+	border-bottom: 250px;
 }
 
 
@@ -103,8 +104,9 @@ body {
 
 }
 #tulokset {
-	height:250px;
+	height:auto;
 	font-size: 20px;
+	
 }
 #nimihaku {
 	background-color: white;
